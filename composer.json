@@ -1,0 +1,66 @@
+{
+    "name": "mchervenkov/bnbfixing",
+    "description": "Laravel BNB Fixing XML Wrapper",
+    "keywords": [
+        "mchervenkov",
+        "bnb",
+        "fixing",
+        "bnb fixing",
+        "bnb laravel",
+        "laravel"
+    ],
+    "homepage": "https://github.com/gdinko/bnbfixing",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Mario Chervenkov",
+            "email": "mario.chervenkov@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Mchervenkov\\BnbFixing\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mchervenkov\\BnbFixing\\Tests\\": "tests"
+        }
+    },
+    "require": {
+        "php": "^8.0|^8.1|^8.2",
+        "guzzlehttp/guzzle": "^7.4",
+        "illuminate/support": "^8.0|^9.0|^10.0",
+        "ext-simplexml": "*"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8.18",
+        "pestphp/pest": "^2.34",
+        "larastan/larastan": "^2.9"
+    },
+    "scripts": {
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mchervenkov\\BnbFixing\\BnbFixingServiceProvider"
+            ],
+            "aliases": {
+                "BnbFixing": "Mchervenkov\\BnbFixing\\Facades\\BnbFixing"
+            }
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
