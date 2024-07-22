@@ -68,7 +68,7 @@ class SyncBnbFixings extends Command
                 }
             }
 
-
+            $this->insertEuro();
 
             return 1;
 
@@ -78,6 +78,9 @@ class SyncBnbFixings extends Command
         }
     }
 
+    /**
+     * @return void
+     */
     protected function insertEuro()
     {
         $euro = \Mchervenkov\BnbFixing\Models\BnbFixing::query()
