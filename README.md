@@ -53,11 +53,15 @@ $bnbFixing->getXmlContent();
 
 // Get Certain exchange rate by code for certain bulgarian lev amount
 // This will return how much Euro are 100 bulgarian lev
-$bnbFixing->getExchangeRateAmount('EUR', 100);
+$bnbFixing->geExchangeBGNRateAmount('EUR', 100);
 
 // Get Bulgarian Lev Rate for certain exchange rate and amount
 // This will return how much bulgarian lev are 100 Euro
-$bnbFixing->getReverseExchangeRateAmount('EUR', 100);
+$bnbFixing->getReverseExchangeBGNRateAmount('EUR', 100);
+
+// Get Amount between two exchange rates depends on BNB Fixings
+// This will return how much euro are 100 american dollars
+$bnbFixing->getExchangeRate('USD', 'EUR', 100);
 ```
 
 Commands

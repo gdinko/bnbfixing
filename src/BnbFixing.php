@@ -49,7 +49,7 @@ class BnbFixing
     /**
      * Get Certain exchange rate by code for certain bulgarian lev amount
      */
-    public function getExchangeRateAmount(string $exchangeRateCode, int|float $amount): float|int
+    public function geExchangeBGNRateAmount(string $exchangeRateCode, int|float $amount): float|int
     {
         $exchangeRate = $this->findExchangeRate($exchangeRateCode);
 
@@ -59,13 +59,42 @@ class BnbFixing
     /**
      * Get Bulgarian Lev Rate for certain exchange rate and amount
      */
-    public function getReverseExchangeRateAmount(string $exchangeRateCode, int|float $amount): float|int
+    public function getReverseExchangeBGNRateAmount(string $exchangeRateCode, int|float $amount): float|int
     {
         $exchangeRate = $this->findExchangeRate($exchangeRateCode);
 
         return ($amount / $exchangeRate->ratio) * $exchangeRate->rate;
     }
 
+    /**
+     * @param string $fromExchangeRateCode
+     * @param string $toExchangeRateCode
+     * @param int|float $amount
+     * @return float|int
+     * @throws BnbFixingException
+     */
+    public function getExchangeRate(
+        string $fromExchangeRateCode,
+        string $toExchangeRateCode,
+        int|float $amount
+    ): float|int
+    {
+        $fromCurrency = $this->findExchangeRate($fromExchangeRateCode);
+        $toCurrency = $this->findExchangeRate($toExchangeRateCode);
+
+        $fromRate = $fromCurrency->rate / $fromCurrency->ratio;
+        $toRate = $toCurrency->rate / $toCurrency->ratio;
+
+        $fromAmount = $amount * $fromRate;
+
+        return $fromAmount * (1 / $toRate);
+
+    }
+
+    /**
+     * @param string $exchangeRateCode
+     * @throws BnbFixingException
+     */
     protected function findExchangeRate(string $exchangeRateCode)
     {
         $exchangeRate = \Mchervenkov\BnbFixing\Models\BnbFixing::query()

@@ -68,7 +68,7 @@ class SyncBnbFixings extends Command
                 }
             }
 
-            $this->insertEuro();
+            $this->insertStaticExchangeRates();
 
             return 1;
 
@@ -81,10 +81,14 @@ class SyncBnbFixings extends Command
     /**
      * @return void
      */
-    protected function insertEuro()
+    protected function insertStaticExchangeRates() : void
     {
         $euro = \Mchervenkov\BnbFixing\Models\BnbFixing::query()
             ->where('code', 'EUR')
+            ->first();
+
+        $bgn = \Mchervenkov\BnbFixing\Models\BnbFixing::query()
+            ->where('code', 'BGN')
             ->first();
 
         if(!$euro) {
@@ -95,6 +99,17 @@ class SyncBnbFixings extends Command
                     'ratio' => 1,
                     'rate' => '1.95583',
                     'reverse_rate' => '0.511292',
+                ]);
+        }
+
+        if(!$bgn) {
+            \Mchervenkov\BnbFixing\Models\BnbFixing::query()
+                ->create([
+                    'name' => 'Лев',
+                    'code' => 'BGN',
+                    'ratio' => 1,
+                    'rate' => 1,
+                    'reverse_rate' => 1,
                 ]);
         }
     }
